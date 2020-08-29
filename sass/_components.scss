@@ -1,0 +1,562 @@
+//////////////////////////////
+// logo
+.logo {
+  height: 3.25rem;
+  margin-left: 3rem;
+}
+/////////////////////////
+// searchbox
+.search {
+  flex: 0 0 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media only screen and(max-width:$bp-smallest) {
+    order: 1;
+    flex: 0 0 100%;
+  }
+  &__input {
+    font-family: inherit;
+    font-size: inherit;
+    background-color: var(--color-grey-light-2);
+    color: inherit;
+    border: none;
+    padding: 0.7rem 2rem;
+    width: 90%;
+    transition: all 0.3s;
+    border-radius: 50px;
+    margin-right: -3.25rem;
+    &::-webkit-input-placeholder {
+      color: var(--color-grey-light-4);
+      font-weight: 100;
+    }
+    &:focus {
+      outline: none;
+      width: 100%;
+      background-color: var(--color-grey-light-3);
+      @media only screen and(max-width:$bp-smallest) {
+        width: 92%;
+      }
+    }
+  }
+  &__input:focus + &__button {
+    background-color: var(--color-grey-light-3);
+  }
+  &__button {
+    border: none;
+    background-color: var(--color-grey-light-2);
+    transition: all 0.2s;
+    &:focus {
+      outline: none;
+    }
+    &:active {
+      transform: translateY(2px);
+    }
+  }
+  &__icon {
+    height: 2rem;
+    width: 2rem;
+    fill: var(--color-grey-dark-3);
+  }
+}
+
+// user nav
+
+.user-nav {
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+  // now this user nav is an item withhin the flex container header
+  // so i could use algign self on it as it is an item and flex container at the same time
+  justify-content: space-between;
+
+  & > * {
+    padding: 0 2rem;
+    cursor: pointer;
+    height: 100%;
+    transition: all 0.3s;
+  }
+  & > *:hover {
+    background-color: var(--color-grey-light-2);
+  }
+  &__icon-box {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  &__icon {
+    height: 2.25rem;
+    width: 2.25rem;
+    fill: var(--color-grey-dark-2);
+  }
+  &__notification {
+    font-size: 0.8rem;
+    height: 1.75rem;
+    width: 1.75rem;
+    border-radius: 100px;
+    background-color: var(--color-primary);
+    color: #fff;
+    position: absolute;
+    top: 1.5rem;
+    left: 3.6rem;
+    // tis will affect its cild elements which is in this case te text
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__user {
+    // i am having mutlpile flex containers within themselves to control the diff items
+    display: flex;
+    align-items: center;
+  }
+
+  &__user-photo {
+    height: 3.75rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+  }
+}
+
+//////@extend
+// side nav
+
+.side-nav {
+  font-size: 1.4rem;
+  list-style: none;
+  margin-top: 3.5rem;
+
+  &__item {
+    position: relative;
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+      @media only screen and(max-width:$bp-medium) {
+        margin: 0;
+      }
+    }
+    @media only screen and(max-width:$bp-medium) {
+      flex: 1;
+    }
+  }
+  &__item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 3px;
+    background-color: var(--color-primary);
+    transform: scaleY(0);
+    // so this the origin of the transfer
+    // and its center by :default
+    transition: transform 0.3s, width.4s cubic-bezier(1, 0, 0, 1) 0.2s,
+      background-color 0.1s;
+  }
+  &__item:hover::before,
+  &__item--active::before {
+    transform: scaleY(1);
+    width: 100%;
+  }
+  &__item:active::before {
+    background-color: var(--color-primary-light);
+  }
+  &__link:link,
+  &__link:visited {
+    color: var(--color-grey-light-1);
+    text-decoration: none;
+    text-transform: uppercase;
+    display: block;
+    padding: 1.5rem 3rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+    @media only screen and(max-width:$bp-medium) {
+      justify-content: center;
+      padding: 2rem;
+    }
+    @media only screen and(max-width:$bp-small) {
+      display: flex;
+      flex-direction: column;
+    }
+    // z-index doesnt work fi there is not a specified position
+  }
+  &__icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-right: 2rem;
+    // currentColor gets the current color of the parent
+    // it does change when hover effects happens as well this is fucking great
+    fill: currentColor;
+    @media only screen and(max-width:$bp-small) {
+      margin-right: 0rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+  @media only screen and(max-width:$bp-medium) {
+    display: flex;
+    margin: 0;
+  }
+}
+
+//////////@extend
+// legal text
+
+.legal {
+  font-size: 1.2rem;
+  color: var(--color-grey-light-4);
+  text-align: center;
+  padding: 2.5rem;
+  @media only screen and(max-width:$bp-medium) {
+    display: none;
+  }
+}
+
+/////////@extend
+// gallery
+
+.gallery {
+  display: flex;
+  &__photo {
+    width: 100%;
+    display: block;
+  }
+}
+
+.overview {
+  display: flex;
+  border-bottom: var(--border-light);
+  align-items: center;
+
+  &__heading {
+    font-size: 2.25rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 1.5rem 3rem;
+    @media only screen and(max-width:$bp-small) {
+      font-size: 1.8rem;
+      padding: 1.25rem 2rem;
+    }
+  }
+  &__rating {
+    background-color: var(--color-primary);
+    color: #fff;
+    margin-left: 3rem;
+    padding: 0 2.25rem;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    @media only screen and(max-width:$bp-small) {
+      padding: 0 1.5rem;
+    }
+  }
+
+  &__icon {
+    &-star,
+    &-location {
+      width: 1.75rem;
+      height: 1.75rem;
+      fill: var(--color-primary);
+      // svgs acts like text inline and it produces some spaces  so we need to either set line height to 0 or display flex for their parent element to remove that inline space
+    }
+  }
+  &__location {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+  }
+  &__icon-location {
+    margin-right: 0.5rem;
+  }
+  &__rating-average {
+    font-size: 2.25rem;
+    font-weight: 300;
+    margin-bottom: -3px;
+
+    @media only screen and(max-width:$bp-small) {
+      font-size: 1.8rem;
+    }
+  }
+  &__rating-count {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    @media only screen and(max-width:$bp-small) {
+      font-size: 0.5rem;
+    }
+  }
+  &__stars {
+    // flex: 1;
+    // margin auto works quite well with flexbox
+    // as it its going to margin whatever space is left on the specified side
+    display: flex;
+    margin-right: auto;
+  }
+}
+
+///////////////////
+// btn inline
+
+.btn-inline {
+  border: none;
+  outline: none;
+  color: var(--color-primary);
+  font-size: inherit;
+  border-bottom: 1px solid currentColor;
+  background-color: transparent;
+  padding-bottom: 2px;
+  display: inline-block;
+  cursor: pointer;
+  transition: all 0.25s;
+  align-self: center;
+  &__arrow-left {
+    margin-left: 3px;
+    transition: margin-left 0.2s;
+  }
+  &:hover &__arrow-left {
+    margin-left: 8px;
+  }
+  &:hover {
+    color: var(--color-grey-dark-1);
+  }
+  &:focus {
+    outline: none;
+    animation: pulsate 1s infinite;
+    background-color: transparent;
+  }
+}
+
+/////////////////////////
+// paragprah
+
+.paragraph:not(:last-of-type) {
+  margin-bottom: 2rem;
+}
+.list {
+  margin: 3rem 0;
+  padding: 3rem 0;
+  border-bottom: var(--border-light);
+  border-top: var(--border-light);
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  &__item {
+    flex: 0 0 50%;
+    margin-bottom: 0.7rem;
+    display: flex;
+    align-items: center;
+  }
+  &__item::before {
+    content: "";
+    width: 2rem;
+    height: 2rem;
+    display: inline-block;
+
+    // masks for newer browsers
+    background-color: var(--color-primary);
+    // so masks are similar to clipping
+    // so we can use a backgrond color and then include an svg
+    // and that svg will take the background color as its color
+    // or in fact that background color will lie over the svg with a higher z-index
+    -webkit-mask-image: url(../img/chevron-thin-right.svg);
+    -webkit-mask-size: cover;
+
+    mask-image: url(../img/chevron-thin-right.svg);
+    mask-size: cover;
+    // older browser ways
+    // background-image: url(../img/chevron-thin-right.svg);
+    margin-right: 0.5rem;
+  }
+}
+
+// reccomend
+
+.recommend {
+  font-size: 1.3rem;
+  color: var(--color-grey-dark-3);
+  display: flex;
+  align-items: center;
+
+  &__photo {
+    box-sizing: content-box;
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    border: 3px solid white;
+    &:not(:last-of-type) {
+      margin-right: -2rem;
+    }
+  }
+  &__friends {
+    display: flex;
+  }
+  &__count {
+    // this works for flex elements
+    margin-right: auto;
+  }
+}
+
+.review {
+  position: relative;
+  background-color: white;
+  box-shadow: var(--shadow-light);
+  padding: 3rem;
+  margin-bottom: 3.5rem;
+  overflow: hidden;
+  @media only screen and(max-width:$bp-medium) {
+    padding: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  &__text {
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 10;
+  }
+  &__user {
+    display: flex;
+    align-items: center;
+  }
+  &__photo {
+    height: 4.5rem;
+    width: 4.5rem;
+    border-radius: 50%;
+  }
+  &__user-box {
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1rem;
+  }
+  &__rating {
+    font-size: 2rem;
+    color: var(--color-primary);
+  }
+  &__user-name {
+    color: var(--color-grey-dark-1);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  &__user-date {
+    font-size: 1.2rem;
+    color: var(--color-grey-dark-3);
+    font-weight: 600;
+  }
+  &::before {
+    content: "\201C";
+    position: absolute;
+    left: -1rem;
+    top: -2.75rem;
+    font-size: 20rem;
+    color: var(--color-grey-light-2);
+    font-family: sans-serif;
+    line-height: 1;
+    z-index: 1;
+  }
+}
+
+////////////////////
+// cta
+
+.cta {
+  padding: 3.5rem 0;
+  text-align: center;
+  background-color: white;
+  @media only screen and(max-width:$bp-medium) {
+    padding: 2.5rem 0;
+  }
+  &__book-now {
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 2.5rem;
+    text-transform: uppercase;
+  }
+}
+
+///////////////////
+// cta btn
+
+.btn {
+  font-size: 1.5rem;
+  position: relative;
+  font-weight: 300;
+  border: none;
+  text-transform: uppercase;
+  border-radius: 100px;
+  overflow: hidden;
+  color: #fff;
+  cursor: pointer;
+  background-image: linear-gradient(
+    to right,
+    var(--color-primary),
+    var(--color-primary-dark)
+  );
+  & > * {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    transition: all 0.2s;
+  }
+  &__visible {
+    padding: 2rem 7.5rem;
+  }
+  &__invisible {
+    position: absolute;
+    left: 0;
+    top: -100%;
+    padding: 2rem 0;
+  }
+  &:hover &__invisible {
+    top: 0;
+  }
+
+  &:hover &__visible {
+    transform: translateY(100%);
+  }
+  &:hover {
+    background-image: linear-gradient(
+      to left,
+      var(--color-primary),
+      var(--color-primary-dark)
+    );
+  }
+
+  &:focus {
+    outline: none;
+    animation: pulsate2 1s infinite;
+  }
+}
+@keyframes pulsate2 {
+  0% {
+    transform: scale(1);
+    box-shadow: none;
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.25);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: none;
+  }
+}
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+    box-shadow: none;
+  }
+  50% {
+    transform: scale(1.05rem);
+    box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.25);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: none;
+  }
+}
